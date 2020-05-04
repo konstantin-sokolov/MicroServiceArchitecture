@@ -14,12 +14,12 @@ spec:
        spec:
           containers:
           - name: identity
-            image: sokolik/user-api:v1
+            image:  sokolik/user-api:v2
             env:
               - name: ConnectionStrings__Identity
                 valueFrom:
-                  secretKeyRef:
-                    name: identity-secret
+                  configMapKeyRef:
+                    name: identity-config
                     key: ConnectionStrings__Identity
             ports:
               - name: web

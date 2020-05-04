@@ -25,7 +25,9 @@ namespace Migrator
 
             var files = Directory.GetFiles(directory, "*.sql", SearchOption.AllDirectories);
             Console.WriteLine($"Found {files.Length} files in directory");
-
+            if (files.Length == 0)
+                Environment.Exit(0);
+            
             var host = Environment.GetEnvironmentVariable("DB_HOST");
             var port = Environment.GetEnvironmentVariable("DB_PORT");
             var db = Environment.GetEnvironmentVariable("DB_DATABASE");
@@ -33,7 +35,7 @@ namespace Migrator
             var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
 
             var connectionString = $"Host={host};Port={port};Database={db};Username={user};Password={password}";
-
+            Console.WriteLine($"Use connection string:{connectionString}");
             using (var connection = new NpgsqlConnection(connectionString))
             {
                 connection.Open();

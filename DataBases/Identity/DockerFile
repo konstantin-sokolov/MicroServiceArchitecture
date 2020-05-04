@@ -1,0 +1,5 @@
+FROM sokolik/db-migrator:latest AS migrator
+COPY [".", "/db_migration"]
+
+WORKDIR "/app"
+ENTRYPOINT ["dotnet", "Migrator.dll", "/db_migration"]

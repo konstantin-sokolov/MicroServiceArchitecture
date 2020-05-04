@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: identity-deployment
+spec:
+    replicas: 1
+    selector:
+       matchLabels:
+          app: identity-app
+    template:
+       metadata:
+          labels:
+             app: identity-app
+       spec:
+          containers:
+          - name: identity
+            image: sokolik/user-api:v1
+            env:
+              - name: ConnectionStrings__Identity
+                valueFrom:
+                  secretKeyRef:
+                    name: identity-secret
+                    key: ConnectionStrings__Identity
+            ports:
+              - name: web
+                containerPort: 8000

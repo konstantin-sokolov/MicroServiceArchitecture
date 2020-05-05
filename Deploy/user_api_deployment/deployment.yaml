@@ -18,8 +18,8 @@ spec:
             env:
               - name: ConnectionStrings__Identity
                 valueFrom:
-                  configMapKeyRef:
-                    name: identity-config
+                  secretKeyRef:
+                    name: identity-secret
                     key: ConnectionStrings__Identity
             ports:
               - name: web

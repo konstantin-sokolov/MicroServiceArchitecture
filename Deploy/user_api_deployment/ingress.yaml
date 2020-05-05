@@ -6,10 +6,10 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
-  - host: hello.world
+  - host: arch.homework
     http:
       paths:
-        - path: /myapp($|/)(.*)
+        - path: /otusapp($|/)(.*)
           backend:
-            serviceName: hello-service
-            servicePort: 9000
+            serviceName: identity-service
+            servicePort: 8000

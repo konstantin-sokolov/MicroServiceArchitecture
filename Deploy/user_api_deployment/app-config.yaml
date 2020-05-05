@@ -1,6 +1,6 @@
 apiVersion: v1
-kind: ConfigMap
+kind: Secret
 metadata:
-  name: identity-config
+  name: identity-secret
 data:
-  ConnectionStrings__Identity: Host=postgres;Port=5432;Database=myapp;Username=myuser;Password=passwd
+  ConnectionStrings__Identity: SG9zdD1wb3N0Z3JlcztQb3J0PTU0MzI7RGF0YWJhc2U9bXlhcHA7VXNlcm5hbWU9bXl1c2VyO1Bhc3N3b3JkPXBhc3N3ZA==

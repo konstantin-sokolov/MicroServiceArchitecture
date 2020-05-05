@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "identity-chart.fullname" . }}
+  labels:
+    {{- include "identity-chart.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "identity-chart.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "identity-chart.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Chart.AppVersion }}"
+          ports:
+            - name: web
+              containerPort: 8000
+              protocol: TCP
+          env:
+            - name: ConnectionStrings__Identity
+              valueFrom:
+                secretKeyRef:
+                  name: identity-secret
+                  key: ConnectionStrings__Identity

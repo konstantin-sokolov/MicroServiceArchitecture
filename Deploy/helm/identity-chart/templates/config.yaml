@@ -1,0 +1,6 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: identity-secret
+data:
+  ConnectionStrings__Identity: Host={{ .Values.externalPostgresql.postgresqlHost }};Port={{ .Values.externalPostgresql.postgresqlPort }};Database={{ .Values.externalPostgresql.postgresqlDatabase }};Username={{.Values.externalPostgresql.postgresqlUsername}};Password={{.Values.externalPostgresql.postgresqlPassword}} | base64 

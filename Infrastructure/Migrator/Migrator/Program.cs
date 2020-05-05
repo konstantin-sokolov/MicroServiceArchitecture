@@ -28,13 +28,7 @@ namespace Migrator
             if (files.Length == 0)
                 Environment.Exit(0);
             
-            var host = Environment.GetEnvironmentVariable("DB_HOST");
-            var port = Environment.GetEnvironmentVariable("DB_PORT");
-            var db = Environment.GetEnvironmentVariable("DB_DATABASE");
-            var user = Environment.GetEnvironmentVariable("DB_USER");
-            var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
-
-            var connectionString = $"Host={host};Port={port};Database={db};Username={user};Password={password}";
+            var connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__Migrator");
             Console.WriteLine($"Use connection string:{connectionString}");
             using (var connection = new NpgsqlConnection(connectionString))
             {

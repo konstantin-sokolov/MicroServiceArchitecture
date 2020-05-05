@@ -7,9 +7,27 @@ service:
   type: NodePort
   port: 8000
  
-externalPostgresql:
+postgresql:
+  enabled: true
   postgresqlUsername: myuser
   postgresqlPassword: passwd
   postgresqlDatabase: myapp
-  postgresqlHost: "postgres"
-  postgresqlPort: "5432"
+  service:
+    port: "5432"
+
+ingress:
+  enabled: true
+  annotations: {
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+  }
+    # kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: arch.homework
+      paths: [
+        /otusapp($|/)(.*)
+      ]
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local

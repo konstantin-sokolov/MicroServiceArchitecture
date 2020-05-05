@@ -3,4 +3,4 @@ kind: Secret
 metadata:
   name: identity-secret
 data:
-  ConnectionStrings__Identity: Host={{ .Values.externalPostgresql.postgresqlHost }};Port={{ .Values.externalPostgresql.postgresqlPort }};Database={{ .Values.externalPostgresql.postgresqlDatabase }};Username={{.Values.externalPostgresql.postgresqlUsername}};Password={{.Values.externalPostgresql.postgresqlPassword}} | base64 
+  ConnectionStrings__Identity: {{ printf "Host=%s;Port=%s;Database=%s;Username=%s;Password=%s" (include "postgresql.fullname" .) .Values.postgresql.service.port .Values.postgresql.postgresqlDatabase .Values.postgresql.postgresqlUsername .Values.postgresql.postgresqlPassword  | b64enc | quote }}
